@@ -14,14 +14,31 @@ emojis
 end
 
 def get_japanese_emoticon(file_path, emoticon)
-  load_library(file_path)
-  jap_emoji = emojis["get_emoticon"][given_emoji]
-  if jap_emoji == nil
-        jap_emoji = "Sorry, that emoticon was not found"
-      end
-        jap_emoji
-      end
-
-def get_english_meaning
   # code goes here
+  translation = ""
+  emo_hash = load_library(file_path)
+  emo_hash["get_emoticon"].each do |english, japanese|
+    if english == emoticon
+      translation = japanese
+    end
+  end
+  if translation == ""
+    translation = "Sorry, that emoticon was not found"
+  end
+  translation
+end
+
+def get_english_meaning(file_path, emoticon)
+  # code goes here
+  translation = ""
+  emo_hash = load_library(file_path)
+  emo_hash["get_meaning"].each do |japanese, meaning|
+    if japanese == emoticon
+      translation = meaning
+    end
+  end
+  if translation == ""
+    translation = "Sorry, that emoticon was not found"
+  end
+  translation
 end
